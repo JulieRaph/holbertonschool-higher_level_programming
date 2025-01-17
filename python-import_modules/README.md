@@ -25,9 +25,9 @@
 * The length of your files will be tested using wc
 
 ## Tasks
-* Import a simple function from a simple file
-* My first toolbox!
-* How to make a script dynamic!
-* Infinite addition
-* Who are you?
-* Everything can be imported
+- [x] Import a simple function from a simple file
+- [x] My first toolbox!
+- [x] How to make a script dynamic!
+- [x] Infinite addition
+- [x] Who are you?
+- [x] Everything can be imported
