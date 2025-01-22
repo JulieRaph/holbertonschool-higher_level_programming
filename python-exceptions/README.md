@@ -26,4 +26,26 @@
 
 ## Main functions 
 For each exercise in the project, you have a main function to help you execute your code. In this particular project, these functions are stored in the gitignore folder for greater visibility of each code. Here's an example of a main function: 
-`
+
+> #!/usr/bin/python3
+> safe_print_list = __import__('0-safe_print_list').safe_print_list
+
+> my_list = [1, 2, 3, 4, 5]
+
+> nb_print = safe_print_list(my_list, 2)
+> print("nb_print: {:d}".format(nb_print))
+> nb_print = safe_print_list(my_list, len(my_list))
+> print("nb_print: {:d}".format(nb_print))
+> nb_print = safe_print_list(my_list, len(my_list) + 2)
+> print("nb_print: {:d}".format(nb_print))
+
+## Tasks 
+
+- [x] Safe list printing
+- [x] Safe printing of an integers list
+- [x] Print and count integers
+- [x] Integers division with debug
+- [x] Divide a list
+- [x] Raise exception
+- [x] Raise a message
+      
