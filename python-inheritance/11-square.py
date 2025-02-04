@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """This module contains a class Square that inherits from Rectangle"""
+
+
 Rectangle = __import__('9-rectangle').Rectangle
 
 
@@ -22,8 +24,8 @@ class Square(Rectangle):
 
     def area(self):
         """Calculate the area"""
-        return (self.__size * self.__size)
+        return self.__size ** 2
 
     def __str__(self):
         """Return a string representation of the square"""
-        return "[Rectangle] {}/{}".format(self.__size, self.__size)
+        return "[Square] {}/{}".format(self.__size, self.__size)
