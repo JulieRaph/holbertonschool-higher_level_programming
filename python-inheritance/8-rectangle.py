@@ -1,16 +1,6 @@
 #!/usr/bin/python3
-"""
-This module contains a class Rectangle that inherits from BaseGeometry
-(7-base_geometry.py)
-"""
-
-
-class BaseGeometry:
-    def integer_validator(self, name, value):
-        if type(value) is not int:
-            raise TypeError(f"{name} must be an integer")
-        if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
+"""This module contains a class Rectangle that inherits from BaseGeometry"""
+BaseGeometry = __import__('7-base_geometry').BaseGeometry
 
 
 class Rectangle(BaseGeometry):
