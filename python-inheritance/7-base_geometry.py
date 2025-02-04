@@ -3,10 +3,10 @@
 
 
 class BaseGeometry:
-    """A class BaseGeometry with area method & integer_validator"""
+    """A class BaseGeometry"""
 
     def area(self):
-        """Exception with the message area() is not implemented"""
+        """Exception"""
         raise Exception("area() is not implemented")
 
     def integer_validator(self, name, value):
