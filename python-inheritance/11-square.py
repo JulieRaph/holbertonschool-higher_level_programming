@@ -1,39 +1,21 @@
 #!/usr/bin/python3
-"""
-This module contains a class Square that inherits from Rectangle
-(9-rectangle.py)
-(task based on 10-square.py)
-"""
+"""This module contains a class Square that inherits from Rectangle"""
+Rectangle = __import__('9-rectangle').Rectangle
 
 
-class BaseGeometry:
-    """
-    Implementation integer_validator and area method
-    """
-    def area(self):
-        raise Exception("area() is not implemented")
+class Square(Rectangle):
+    """Class representing a square, inheriting from BaseGeometry"""
 
-    def integer_validator(self, name, value):
-        if type(value) is not int:
-            raise TypeError(f"{name} must be an integer")
-        if value <= 0:
-            raise ValueError(f"{name} must be greater than 0")
-
-
-class Square(BaseGeometry):
-    """
-    Class representing a square, inheriting from BaseGeometry
-    """
     def __init__(self, size):
+        """
+        Initialize a square instance
+
+        Args:
+            size (int): The size of the square's size
+
+        Raise:
+            Exception
+        """
         self.integer_validator("size", size)
         self.__size = size
-
-    def area(self):
-        return (self.__size * self.__size)
-
-    def __str__(self):
-        return (f"[Square] {self.__size} / {self.__size}")
-
-    @property
-    def size(self):
-        return self.__size
+        super().__init__(size, size)
