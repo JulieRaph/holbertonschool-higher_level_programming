@@ -11,4 +11,7 @@ def inherits_from(obj, a_class):
     Print if the object is an instance of a class that
     inherited from (directly or indirectly)
     """
-    return isinstance(obj, a_class) and type(obj) is not a_class
+    if issubclass(type(obj), a_class) and type(obj) is not a_class:
+        return True
+    else:
+        False
