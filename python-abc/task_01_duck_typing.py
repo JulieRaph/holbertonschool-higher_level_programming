@@ -23,7 +23,7 @@ class Circle(Shape):
     """Subclass circle from Shape"""
     def __init__(self, radius):
         """initialize the circle object with a given radius"""
-        self.radius = radius
+        self.radius = abs(radius)
 
     def area(self):
         """calculate circle area"""
