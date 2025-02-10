@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 """
-This module to Class to JSON
+This module to Class instances to JSON serializable dict
 """
-
-
-import json
 
 
 def class_to_json(obj):
