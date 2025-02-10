@@ -3,7 +3,12 @@
 
 
 def read_file(filename=""):
-    """Read a file text from my_file_o.txt"""
-    with open("my_file_0.txt") as f:
-        for line in f:
-            print(line, end="")
+    """
+    Read a file text from my_file_o.txt
+
+    Args:
+        filename (str): text to read
+    """
+    with open(filename, encoding="utf-8") as f:
+
+        print(f.read(), end="")
