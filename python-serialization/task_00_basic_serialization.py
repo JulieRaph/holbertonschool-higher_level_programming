@@ -5,6 +5,7 @@ serialize a Python dictionnary to a JSON file and deserialize the JSON
 """
 
 
+import json
 import pickle
 
 
