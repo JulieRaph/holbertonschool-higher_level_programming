@@ -17,34 +17,20 @@ def serialize_to_xml(dictionary, filename):
     except Exception as e:
         print(f"Error: {e}")
 
+
 def deserialize_from_xml(filename):
     """deserialize XMl to a Python dictionary"""
     try:
         tree = ET.parse(filename)
         root = tree.getroot()
 
-        data = {}
+        dictionary = {child.tag: child.text for child in root}
 
-        for child in root:
-            key = child.tag
-            value = child.text
+        return dictionary
 
-            try:
-                value = int(value)
-            except ValueError:
-                try:
-                    value = float(value)
-
-                except ValueError:
-                    if value.lower() == "true":
-                        value = True
-                    elif value.lower() == "false":
-                        value = False
-
-            data[key] = value
-
-        return data
-
-    except(FileNotFoundError, ET.ParseError, Exception) as e:
-        print(f"Error: {e, filename}")
+    except FileNotFoundError:
+        print("Error: The file {} was not found".format(filename))
+        return None
+    except ET.ParseError as e:
+        print("Error: {} can't parsing to XML".format(e))
         return None
