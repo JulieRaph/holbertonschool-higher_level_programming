@@ -21,11 +21,11 @@ def pascal_triangle(n):
     pascal_triangle = [[1]]
 
     for i in range(1, n):
-        row = [None] * (i + 1)
-        row[0], row[-1] = 1, 1
+        row = [1]
 
         for j in range(1, i):
-            row[j] = pascal_triangle[i - 1][j - 1] + pascal_triangle[i - 1][j]
+            row.append(pascal_triangle[i - 1][j - 1]+pascal_triangle[i - 1][j])
+        row.append(1)
         pascal_triangle.append(row)
 
     return pascal_triangle
