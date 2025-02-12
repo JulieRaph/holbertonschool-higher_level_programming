@@ -15,18 +15,25 @@ class CustomObject:
 
     def display(self):
         """To display that print out the object's attributes"""
-        print("Name: {}".format(self.name))
-        print("Age: {}".format(self.age))
-        print("Is student: {}".format(self.is_student))
+        for key in self.__dict__:
+            print("{} : {}".format(key.capitalize(), self.__dict__[key]))
 
     def serialize(self, filename):
         """serialize a python dictionnary to JSON file"""
-        with open(filename, "wb") as file:
-            pickle.dump(self, file)
+        try:
+            with open(filename, "wb") as file:
+                pickle.dump(self, file)
+        except (FileNotFoundError, pickle.PickleError) as e:
+            print("Serialization error: {}".format(e))
+            return None
 
     @classmethod
     def deserialize(cls, filename):
         """deserialize the JSON file to recreate the Python dictionnary"""
-        with open(filename, "rb")as file:
-            loaded_object = pickle.load(file)
-            return loaded_object
+        try:
+            with open(filename, "rb")as file:
+                loaded_object = pickle.load(file)
+                return loaded_object
+        except (FileNotFoundError, pickle.UnpicklingError) as e:
+            print("Deserialization error: {}".format(e))
+            return None
