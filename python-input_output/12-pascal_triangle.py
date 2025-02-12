@@ -5,9 +5,6 @@ of integers representing the Pascal's triangle of n
 """
 
 
-from math import factorial
-
-
 def pascal_triangle(n):
     """
     Create a Pascal's triangle
@@ -21,9 +18,14 @@ def pascal_triangle(n):
     if n <= 0:
         return []
 
-    for i in range(n):
-        row = []
-        for j in range(i + 1):
-            row.append(factorial(i)//(factorial(j) * factorial(i-j)))
+    pascal_triangle = [[1]]
 
-        print(row)
+    for i in range(1, n):
+        row = [None] * (i + 1)
+        row[0], row[-1] = 1, 1
+
+        for j in range(1, i):
+            row[j] = pascal_triangle[i - 1][j - 1] + pascal_triangle[i - 1][j]
+        pascal_triangle.append(row)
+
+    return pascal_triangle
