@@ -13,8 +13,6 @@ def pascal_triangle(n):
         n (int): always be an integer
         if n <= 0, return an empty list
     """
-    n = 5
-
     if n <= 0:
         return []
 
