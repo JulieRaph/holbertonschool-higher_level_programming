@@ -34,6 +34,6 @@ class CustomObject:
             with open(filename, "rb")as file:
                 loaded_object = pickle.load(file)
                 return loaded_object
-        except (FileNotFoundError, pickle.UnpicklingError) as e:
+        except (FileNotFoundError, pickle.UnpicklingError, EOFError) as e:
             print("Deserialization error: {}".format(e))
             return None
