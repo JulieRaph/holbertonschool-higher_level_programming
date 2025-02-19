@@ -10,7 +10,7 @@ def fetch_and_print_posts():
     """Function that fetches all post from JSONPlaceholder"""
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
     if r.status_code == 200:
-        print("Status code: {}".format(r.status_code))
+        print("Status Code: {}".format(r.status_code))
         posts = r.json()
         for post in posts:
             print(post['title'])
@@ -35,3 +35,7 @@ def fetch_and_save_posts():
             writer.writerows(data_to_save)
     else:
         print("Failed to fetch posts. Status code: {}".format(r.status_code))
+
+if __name__ == '__main__':
+    fetch_and_print_posts()
+    fetch_and_save_posts()
