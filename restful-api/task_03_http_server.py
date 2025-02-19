@@ -39,8 +39,9 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b"Endpoint not found")
 
-host = "localhost"
-port = 8000
-httpd = HTTPServer((host, port), MyRequestHandler)
-print("Starting server on http://localhost:8000")
-httpd.serve_forever()
+if __name__ == "__main__":
+    host = "localhost"
+    port = 8000
+    httpd = HTTPServer((host, port), MyRequestHandler)
+    print("Starting server on http://localhost:8000")
+    httpd.serve_forever()
