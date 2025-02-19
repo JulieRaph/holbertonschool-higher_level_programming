@@ -7,7 +7,9 @@ import json
 
 
 class MyRequestHandler(BaseHTTPRequestHandler):
+    """ Class MyrequestHandler """
     def do_GET(self):
+        """Handle GET requests"""
         if self.path == '/data':
             data = {"name": "John", "age": 30, "city": "New York"}
             json_data = json.dumps(data)
@@ -16,12 +18,10 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json_data.encode("utf-8"))
         elif self.path == '/status':
-            status = ("OK")
-            json_status = json.dumps(status)
             self.send_response(200)
             self.send_header("Content-type", "text/html")
             self.end_headers()
-            self.wfile.write(json_status.encode("utf-8"))
+            self.wfile.write("OK".encode("utf-8"))
         elif self.path == '/info':
             info = {"version": "1.0",
                     "description": "A simple API built with http.server"}
