@@ -39,10 +39,9 @@ def get_user(username):
 def add_user():
     """Return a user add or not in users dict"""
     data = request.get_json()
-    username = data.get("username")
-    if username in users:
+    if not data or "username" not in data:
         return jsonify({"error": "Username is required"}), 400
-    users[username] = data
+    users[data["username"]] = data
     return jsonify({"message": "User added", "user": data}), 201
 
 
