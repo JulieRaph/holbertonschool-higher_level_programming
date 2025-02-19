@@ -7,6 +7,7 @@ import csv
 
 
 def fetch_and_print_posts():
+    """Function that fetches all post from JSONPlaceholder"""
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
     if r.status_code == 200:
         print("Status code: {}".format(r.status_code))
@@ -19,6 +20,7 @@ def fetch_and_print_posts():
 
 
 def fetch_and_save_posts():
+    """Function that fetches all post from JSONPlaceholder"""
     r = requests.get('https://jsonplaceholder.typicode.com/posts')
     if r.status_code == 200:
         posts = r.json()
