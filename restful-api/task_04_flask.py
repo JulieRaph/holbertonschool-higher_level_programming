@@ -3,19 +3,19 @@
 
 from flask import Flask, request, jsonify
 
-app = Flask(__name__)
 
+app = Flask(__name__)
 users = {}
 
 
-@app.route("/")
+@app.route('/')
 def home():
     """Return a str in root path"""
     return "Welcome to the Flask API!"
 
 
-@app.route("/data")
-def users():
+@app.route('/data')
+def list_users():
     """Return list of users in data path"""
     return jsonify(list(users.keys()))
 
