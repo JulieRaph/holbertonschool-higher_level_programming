@@ -10,21 +10,25 @@ users = {}
 
 @app.route("/")
 def home():
+    """Return a str in root path"""
     return "Welcome to the Flask API!"
 
 
 @app.route("/data")
 def users():
+    """Return list of users in data path"""
     return jsonify(list(users.keys()))
 
 
 @app.route("/status")
 def status():
+    """Return a str status path"""
     return "OK"
 
 
 @app.route("/users/<username>")
 def get_user(username):
+    """Return a user data in users path"""
     if username in users:
         return jsonify(users[username])
     else:
@@ -33,6 +37,7 @@ def get_user(username):
 
 @app.route("/add_user", methods=["POST"])
 def add_user():
+    """Return a user add or not in users dict"""
     data = request.get_json()
     username = data.get("username")
     if username in users:
