@@ -5,6 +5,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
 
+
 class MyRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/data':
@@ -22,7 +23,8 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json_status.encode("utf-8"))
         elif self.path == '/info':
-            info = {"version": "1.0", "description": "A simple API built with http.server"}
+            info = {"version": "1.0",
+                    "description": "A simple API built with http.server"}
             json_info = json.dumps(info)
             self.send_response(200)
             self.send_header("Content-type", "text/html")
@@ -38,6 +40,7 @@ class MyRequestHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "text/html")
             self.end_headers()
             self.wfile.write(b"Endpoint not found")
+
 
 if __name__ == "__main__":
     host = "localhost"
