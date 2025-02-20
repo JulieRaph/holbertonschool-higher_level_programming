@@ -39,12 +39,12 @@ def verify_password(username, password):
 
 @app.route("/basic-protected", methods=["GET"])
 @auth.login_required
-def basic_authentication():
+def basic_protected():
     return "Basic Auth: Access Granted"
 
 
 @app.route("/login", methods=["POST"])
-def login_user():
+def login():
     username = request.json.get("username", None)
     password = request.json.get("password", None)
     if not username or not password:
@@ -60,7 +60,7 @@ def login_user():
 
 @app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
-def protected():
+def jwt_protected():
     return "JWT Auth: Access Granted"
 
 
