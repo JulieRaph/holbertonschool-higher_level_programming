@@ -1,16 +1,19 @@
 #!/usr/bin/python3
 """API Security and Authentication Techniques"""
 
+
 from flask import Flask, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_httpauth import HTTPBasicAuth
 from flask_jwt_extended import JWTManager, create_access_to_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 app.config['JWT_SECRET_KEY'] = 'secret_key'
 jwt = JWTManager(app)
+
 
 users = {
     "user1": {
@@ -28,8 +31,8 @@ users = {
 
 @auth.verify_password
 def verify_password(username, password):
-    if (username in users and
-            check_password_hash(users[username]["password"], password)):
+    user = users.get(username)
+    if user and check_password_hash(user["password"], password):
         return username
     return None
 
@@ -47,8 +50,8 @@ def login_user():
     if not username or not password:
         return jsonify({"message: username or password required"}), 400
 
-    if (username in users and
-            check_password_hash(users[username]["password"], password)):
+    log_user = users.get(username)
+    if log_user and check_password_hash(log_user["password"], password):
         access_token = create_access_to_token(identity=username)
         return jsonify(access_token=access_token), 200
 
