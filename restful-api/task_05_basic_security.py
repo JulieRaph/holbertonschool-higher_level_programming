@@ -61,7 +61,11 @@ def login():
 @app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
 def jwt_protected():
-    return "JWT Auth: Access Granted"
+    current_user = get_jwt_identity()
+    return jsonify({
+        "message": "JWT Auth: Access Granted",
+        "user": current_user
+    }), 200
 
 
 @app.route("/admin-only", methods=["GET"])
