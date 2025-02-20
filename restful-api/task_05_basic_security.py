@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 """API Security and Authentication Techniques"""
-
-
 from flask import Flask, jsonify, request
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, create_access_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
@@ -20,63 +18,57 @@ users = {
         "username": "user1",
         "password": generate_password_hash("password"),
         "role": "user"
-    },
+        },
     "admin1": {
         "username": "admin1",
         "password": generate_password_hash("password"),
         "role": "admin"
+        }
     }
-}
 
 
 @auth.verify_password
 def verify_password(username, password):
-    user = users.get(username)
-    if user and check_password_hash(user["password"], password):
+    User = users.get(username)
+    if User and check_password_hash(User["password"], password):
         return username
     return None
 
 
-@app.route("/basic-protected", methods=["GET"])
+@app.route("/basic-protected", methods=['GET'])
 @auth.login_required
 def basic_protected():
     return "Basic Auth: Access Granted"
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=['POST'])
 def login():
     username = request.json.get("username", None)
     password = request.json.get("password", None)
     if not username or not password:
-        return jsonify({"message: username or password required"}), 400
+        return jsonify({"message": "username and password required"}), 400
 
-    log_user = users.get(username)
-    if log_user and check_password_hash(log_user["password"], password):
+    logged_user = users.get(username)
+    if logged_user and check_password_hash(logged_user["password"], password):
         access_token = create_access_token(identity=username)
         return jsonify(access_token=access_token), 200
+    return jsonify({"message": "Invalid username or password"}), 401
 
-    return jsonify({"message: Invalid username or password"}), 401
 
-
-@app.route("/jwt-protected", methods=["GET"])
+@app.route("/jwt-protected", methods=['GET'])
 @jwt_required()
 def jwt_protected():
-    current_user = get_jwt_identity()
-    return jsonify({
-        "message": "JWT Auth: Access Granted",
-        "user": current_user
-    }), 200
+    return "JWT Auth: Access Granted"
 
 
-@app.route("/admin-only", methods=["GET"])
+@app.route("/admin-only", methods=['GET'])
 @jwt_required()
-def admin_only():
-    log_user = get_jwt_identity()
-    user = users.get(log_user)
+def admin_access():
+    logged_user = get_jwt_identity()
+    user = users.get(logged_user)
     if user["role"] == "admin":
         return "Admin Access: Granted"
-    else:
-        return jsonify({"error": "Admin access required"}), 403
+    return jsonify({"error": "Admin access required"}), 403
 
 
 @jwt.unauthorized_loader
