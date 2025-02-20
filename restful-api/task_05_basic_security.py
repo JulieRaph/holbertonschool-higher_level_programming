@@ -40,7 +40,7 @@ def verify_password(username, password):
 @app.route("/basic-protected", methods=["GET"])
 @auth.login_required
 def basic_authentication():
-    return jsonify({"Basic Auth: Access Granted"})
+    return "Basic Auth: Access Granted"
 
 
 @app.route("/login", methods=["POST"])
@@ -101,4 +101,4 @@ def handle_needs_fresh_token_error(err):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
