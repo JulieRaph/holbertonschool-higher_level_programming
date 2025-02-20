@@ -5,7 +5,7 @@
 from flask import Flask, jsonify, request
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_httpauth import HTTPBasicAuth
-from flask_jwt_extended import JWTManager, create_access_to_token
+from flask_jwt_extended import JWTManager, create_access_token
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
@@ -52,7 +52,7 @@ def login():
 
     log_user = users.get(username)
     if log_user and check_password_hash(log_user["password"], password):
-        access_token = create_access_to_token(identity=username)
+        access_token = create_access_token(identity=username)
         return jsonify(access_token=access_token), 200
 
     return jsonify({"message: Invalid username or password"}), 401
