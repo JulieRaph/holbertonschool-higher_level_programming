@@ -9,6 +9,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
+app.config['JWT_SECRET_KEY'] = 'secret_key'
 jwt = JWTManager(app)
 
 users = {
@@ -51,17 +52,13 @@ def login_user():
         access_token = create_access_to_token(identity=username)
         return jsonify(access_token=access_token), 200
 
-    return jsonify({"message: Invalid credentials"}), 401
+    return jsonify({"message: Invalid username or password"}), 401
 
 
 @app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
 def protected():
-    current_user = get_jwt_identity()
-    return jsonify({
-        "message": "JWT Auth: Access Granted",
-        "user": current_user
-    }), 200
+    return "JWT Auth: Access Granted"
 
 
 @app.route("/admin-only", methods=["GET"])
