@@ -75,3 +75,4 @@ restful-api/posts.csv
 myenv/
 *main.py
 *__pycache__/
+python-object_relational_mapping/0-select_states.sql
