@@ -81,3 +81,4 @@ python-object_relational_mapping/6-model_state.sql
 .gitignore
 python-object_relational_mapping/6-model_state.py
 python-object_relational_mapping/7-model_state_fetch_all.sql
+python-object_relational_mapping/14-model_city_fetch_by_state.sql
