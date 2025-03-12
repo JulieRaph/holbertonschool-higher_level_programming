@@ -18,4 +18,12 @@
 - [x] RESTful API
 - [x] SQL - Introduction
 - [x] SQL - More queries
-- [x] Python - Object Relational Mapping      
+- [x] Python - Object Relational Mapping
+- [x] Advanced HTML
+- [x] Advanced CSS
+- [x] Python - Server Side Rendering
+- [x] ES6 - Basics
+- [x] ES6 - Classes
+- [x] ES6 - Data Manipulation
+- [x] ES6 - Promises
+- [x] JavaScript - DOM Manipulation        
