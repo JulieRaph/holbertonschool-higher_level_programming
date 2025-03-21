@@ -50,7 +50,7 @@ def items():
 @app.route('/products')
 def products():
     source = request.args.get('source')
-    product_id = request.args.get('id', type=int)
+    id = request.args.get('id', type=int)
 
     if source == 'json':
         products = json_file('products.json')
