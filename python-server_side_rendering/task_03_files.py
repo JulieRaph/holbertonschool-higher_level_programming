@@ -59,20 +59,23 @@ def products():
     source = request.args.get('source')
     product_id = request.args.get('id')
 
+    print(f"Source: {source}")
+    print(f"Product ID: {product_id}")
+
     if source == 'json':
-        products = json_file('products.json')
+        products_list = json_file('products.json')
     elif source == 'csv':
-        products = csv_file('products.csv')
+        products_list = csv_file('products.csv')
     else:
         return render_template(
             'product_display.html',
             error="Wrong source. Please specify 'json' or 'csv'.")
 
     if product_id:
-        products = [product for product in
-                    products if product.get('id') == product_id]
+        products_list = [product for product in
+                    products_list if product.get('id') == product_id]
 
-    return render_template('product_display.html', products=products)
+    return render_template('product_display.html', products=products_list)
 
 
 if __name__ == '__main__':
