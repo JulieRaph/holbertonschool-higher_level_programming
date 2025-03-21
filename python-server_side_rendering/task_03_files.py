@@ -18,15 +18,8 @@ def csv_file(filepath):
     with open(filepath, 'r') as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
-            try:
-                row['id'] = int(row.get('id', 0))
-                row['price'] = float(row.get('price', 0.0))
-            except ValueError:
-                row['id'] = 0
-                row['price'] = 0
-
-            row['name'] = row.get('name', 'N/A')
-            row['category'] = row.get('category', 'N/A')
+            row['id'] = int(row['id'])
+            row['price'] = float(row['price'])
             products.append(row)
         return products
 
@@ -57,25 +50,26 @@ def items():
 @app.route('/products')
 def products():
     source = request.args.get('source')
-    product_id = request.args.get('id')
-
-    print(f"Source: {source}")
-    print(f"Product ID: {product_id}")
+    product_id = request.args.get('id', type=int)
 
     if source == 'json':
-        products_list = json_file('products.json')
+        products = json_file('products.json')
     elif source == 'csv':
-        products_list = csv_file('products.csv')
+        products = csv_file('products.csv')
     else:
         return render_template(
             'product_display.html',
             error="Wrong source. Please specify 'json' or 'csv'.")
 
-    if product_id:
-        products_list = [product for product in
-                    products_list if product.get('id') == product_id]
+    if id:
+        products = [product for product in
+                    products if product['id'] == id]
 
-    return render_template('product_display.html', products=products_list)
+        if not products:
+            return render_template(
+                'product_display.html', error="Product not found")
+
+    return render_template('product_display.html', products=products)
 
 
 if __name__ == '__main__':
