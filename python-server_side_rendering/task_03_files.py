@@ -6,10 +6,12 @@ import csv
 
 app = Flask(__name__)
 
+
 def json_file(filepath):
-    with open (filepath, 'r') as file:
+    with open(filepath, 'r') as file:
         data = json.load(file)
         return data
+
 
 def csv_file(filepath):
     products = []
@@ -27,6 +29,7 @@ def csv_file(filepath):
             row['category'] = row.get('category', 'N/A')
             products.append(row)
         return products
+
 
 @app.route('/')
 def home():
@@ -50,6 +53,7 @@ def items():
     items_list = data.get('items', [])
     return render_template('items.html', items=items_list)
 
+
 @app.route('/products')
 def products():
     source = request.args.get('source')
@@ -60,10 +64,13 @@ def products():
     elif source == 'csv':
         products = csv_file('products.csv')
     else:
-        return render_template('product_display.html', error="Wrong source. Please specify 'json' or 'csv'.")
-    
+        return render_template(
+            'product_display.html',
+            error="Wrong source. Please specify 'json' or 'csv'.")
+
     if product_id:
-        products = [product for product in products if product.get('id') == product_id]
+        products = [product for product in
+                    products if product.get('id') == product_id]
 
     return render_template('product_display.html', products=products)
 
